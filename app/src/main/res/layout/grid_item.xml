@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:background="@android:color/background_dark"
+    android:layout_height="@dimen/grid_item_height">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/grid_item_iv"/>
+
+    <LinearLayout style="@style/grid_item_text_layout">
+
+        <TextView
+            android:id="@+id/grid_item_movie_title"
+            tools:text="I am handsome"
+            style="@style/movie_title_style" />
+
+        <TextView
+            android:id="@+id/grid_item_movie_rate"
+            tools:text="7.9"
+            style="@style/movie_rate_style" />
+    </LinearLayout>
+
+
+</FrameLayout>

@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Popular Movies</string>
+    <string name="eror_message">Failed to get movie data, please check internet connection</string>
+    <string name="content_des_movieposter">MoviePoster</string>
+    <string name="detail_favorite_button">Mark as \n favorite</string>
+
+    <string name="movie_overview_test">Thor is imprisoned on the other side of the universe
+        and finds himself in a race against time to get back to Asgard to stop Ragnarok,
+        the destruction of his homeworld and the end of Asgardian civilization,
+        at the hands of an all-powerful new threat, the ruthless Hela.</string>
+
+    <string name="movie_vote_score">/10</string>
+    <string name="detail_loading">Loading</string>
+    <string name="detail_time_error_message">Fail</string>
+
+    <string name="action_popular">Sort by Popularity</string>
+    <string name="action_vote">Sort by Rating</string>
+</resources>

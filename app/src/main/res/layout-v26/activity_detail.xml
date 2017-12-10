@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.henry.android.popularmovies.DetailActivity">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_height="wrap_content">
+
+        <TextView
+            tools:text="Thor: Ragnarok"
+            android:id="@+id/detail_movie_title_tv"
+            style="@style/detail_title_style"
+            android:autoSizeTextType="uniform"/>
+
+
+        <ImageView
+            android:id="@+id/detail_movie_poster_iv"
+            android:layout_width="150dp"
+            android:layout_height="225dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="36dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/black"
+            app:layout_constraintEnd_toStartOf="@+id/detail_movie_date_tv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detail_movie_title_tv"
+            android:contentDescription="@string/content_des_movieposter" />
+
+        <TextView
+            android:id="@+id/detail_movie_date_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="43dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="43dp"
+            android:textSize="28sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/detail_movie_poster_iv"
+            app:layout_constraintTop_toBottomOf="@+id/detail_movie_title_tv"
+            tools:text="2017-10-25" />
+
+        <TextView
+            android:id="@+id/detail_movie_runtime_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="92dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:textSize="28sp"
+            android:textStyle="italic|bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/detail_movie_poster_iv"
+            app:layout_constraintTop_toBottomOf="@+id/detail_movie_date_tv"
+            android:text="@string/detail_loading"
+            android:layout_marginRight="92dp"
+            android:layout_marginLeft="16dp" />
+
+        <TextView
+            android:id="@+id/detail_movie_vote_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="109dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/detail_movie_poster_iv"
+            app:layout_constraintTop_toBottomOf="@+id/detail_movie_runtime_tv"
+            tools:text="7.6/10"
+            android:textColor="@android:color/black"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="109dp" />
+
+        <Button
+            android:id="@+id/detail_favorite_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="96dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/lightGreen"
+            android:padding="10dp"
+            android:text="@string/detail_favorite_button"
+            android:textColor="@color/textLightGray"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/detail_movie_poster_iv"
+            app:layout_constraintTop_toBottomOf="@+id/detail_movie_vote_tv"
+            android:layout_marginRight="96dp"
+            android:layout_marginLeft="16dp" />
+
+
+        <TextView
+            android:id="@+id/detail_movie_overview_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="28dp"
+            android:paddingLeft="36dp"
+            android:paddingRight="36dp"
+            android:textColor="@color/colorGray"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detail_movie_poster_iv"
+            tools:text="@string/movie_overview_test" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginEnd="36dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/colorGray"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/detail_movie_overview_tv" />
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>
