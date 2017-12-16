@@ -5,6 +5,10 @@ Popular Movies
 
 電影資訊從[The movie database](https://www.themoviedb.org/)網站提供的API獲取。
 
+![Preview 1](./img/screenshot_1.png)
+
+![Preview 2](./img/screenshot_2.png)
+
 How To Use
 ============================
 
