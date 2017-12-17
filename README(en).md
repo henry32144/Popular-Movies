@@ -18,7 +18,9 @@ Environment
 =============================
 
 AndroidSdk version:
+
 minSdkVersion 15
+
 targetSdkVersion 26
 
 Built With
