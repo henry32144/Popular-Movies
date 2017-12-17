@@ -14,6 +14,12 @@ How To Use
 
 下載解壓縮之後，用Android Studio開啟
 
+Environment
+=============================
+
+AndroidSdk version:
+minSdkVersion 15
+targetSdkVersion 26
 
 Built With
 =============================
@@ -21,7 +27,8 @@ Built With
 IDE:
 *	[Android Studio](https://developer.android.com/studio/index.html)
 
-
+Library:
+*	[Picasso](http://square.github.io/picasso/)
 
 Author
 =============================
