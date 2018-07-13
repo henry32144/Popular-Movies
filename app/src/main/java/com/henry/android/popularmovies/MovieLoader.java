@@ -36,7 +36,7 @@ public class MovieLoader extends AsyncTaskLoader< ArrayList<MovieInfo> > {
         ArrayList<MovieInfo> movieInfos;
 
         //Check valid queryType
-        if (queryType < 0 || queryType > 3) {
+        if (queryType < 0 || queryType > 4) {
             return null;
         }
 
@@ -45,7 +45,6 @@ public class MovieLoader extends AsyncTaskLoader< ArrayList<MovieInfo> > {
         } else {
             movieInfos = MovieQuery.fetchMovieData(movieID,queryType);
         }
-        Log.e("Send async", queryType + "");
 
         return movieInfos;
     }

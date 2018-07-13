@@ -48,6 +48,14 @@ public class MovieQuery  {
                         Constant.MOVIEID_REQUEST +
                         Constant.API_KEY;
                 break;
+            case Constant.QUERY_TRAILER:
+
+                urlString = Constant.BASIC_URL +
+                        movieID +
+                        Constant.TRAILER_REQUEST +
+                        Constant.MOVIEID_REQUEST +
+                        Constant.API_KEY;
+                break;
             default:
                 urlString = Constant.BASIC_URL +
                         Constant.POPULAR_MOVIE_REQUEST +
@@ -66,7 +74,7 @@ public class MovieQuery  {
 
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
-
+        Log.e(LOG_TAG, "make request");
         // return if url is null
         if (url == null) {
             return jsonResponse;
@@ -142,20 +150,46 @@ public class MovieQuery  {
                 double movieVote = baseJsonResponse.optDouble(Constant.JSONKeys.MOVIEVOTE);
 
                 int runTime = baseJsonResponse.optInt(Constant.JSONKeys.MOVIETIME);
+
                 // create new news object
                 MovieInfo movieObj = new MovieInfo(movieTitle, moviePosterPath, movieOverview,
                         movieReleaseDate, movieID, movieVote);
 
                 movieObj.setMovieRunTime(runTime);
-                Log.e(LOG_TAG, "MovieRuntime: " + movieID);
-                Log.e(LOG_TAG, "MovieRuntime: " + runTime);
+
                 movieInfos.add(movieObj);
 
             } catch (JSONException e) {
                 Log.e(LOG_TAG, "Problem parsing the movie JSON results by ID", e);
             }
-        }
-        else {
+        } else if (RequestType == Constant.QUERY_TRAILER) {
+            try {
+                // create json object
+                JSONObject baseJsonResponse = new JSONObject(movieJSON);
+
+                JSONArray results = baseJsonResponse.getJSONArray(Constant.JSONKeys.RESULT);
+
+                ArrayList<String> movieTrailers = new ArrayList<String>();
+                for (int i = 0; i < results.length(); i++) {
+
+                    //get json data from array
+                    JSONObject currentMovieInfo = results.getJSONObject(i);
+
+                    String movieTrailer = currentMovieInfo.optString(Constant.JSONKeys.MOVIETRAILER);
+
+                    String videoType = currentMovieInfo.optString(Constant.JSONKeys.VIDEO_TYPE);
+
+                    String videoSite = currentMovieInfo.optString(Constant.JSONKeys.TRAILER_SITE);
+
+                    if (videoSite.equals("YouTube") && videoType.equals("Trailer") && movieTrailers.size() < 3) {
+                        movieTrailers.add(movieTrailer);
+                    }
+                }
+                movieInfos.add(new MovieInfo(movieTrailers));
+            } catch (JSONException e) {
+                Log.e(LOG_TAG, "Problem parsing the movie JSON results by ID", e);
+            }
+        } else {
             try {
                 // create json object
                 JSONObject baseJsonResponse = new JSONObject(movieJSON);
@@ -185,7 +219,6 @@ public class MovieQuery  {
 
                     movieInfos.add(movieObj);
                 }
-
             } catch (JSONException e) {
                 Log.e(LOG_TAG, "Problem parsing the movies JSON results", e);
             }
@@ -195,10 +228,10 @@ public class MovieQuery  {
 
     public static ArrayList<MovieInfo> fetchMovieData(String movieID, int RequestType) {
 
-        Log.e(LOG_TAG, movieID + "  " + RequestType);
+
         //create URL object
         URL url = buildUrl(movieID, RequestType);
-        Log.e(LOG_TAG, "URL" + url.toString());
+
         // send HTTP request to url and parse the data
         String jsonResponse = null;
         try {

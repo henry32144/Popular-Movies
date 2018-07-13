@@ -3,11 +3,15 @@ Popular Movies
 
 This is an app that provides movies information, and user can sort movies by popularity or ratings.
 
+Add favorite movie feature and watch trailer feature.
+
 Movies information fetch from [The movie database](https://www.themoviedb.org/) API.
 
 ![Preview 1](./img/screenshot_1.png)
 
 ![Preview 2](./img/screenshot_2.png)
+
+![Preview 3](./img/screenshot_3.png)
 
 How To Use
 ============================

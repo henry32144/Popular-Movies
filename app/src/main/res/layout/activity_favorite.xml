@@ -5,19 +5,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
-    tools:context="com.henry.android.popularmovies.MainActivity">
+    tools:context="com.henry.android.popularmovies.FavoriteActivity">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerview_movie"
+        android:id="@+id/rv_favorite_movie"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 
     <TextView
-        android:id="@+id/tv_error_message_display"
+        android:id="@+id/tv_favorite_error_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:text="@string/eror_message"
+        android:text="@string/fav_empty_message"
         android:textSize="20sp"
         android:gravity="center"
         android:textColor="@android:color/white"
@@ -25,7 +25,7 @@
         android:visibility="invisible" />
 
     <ProgressBar
-        android:id="@+id/pb_loading_indicator"
+        android:id="@+id/pb_favorite_loading_indicator"
         android:layout_height="42dp"
         android:layout_width="42dp"
         android:layout_centerInParent="true" />
@@ -37,23 +37,22 @@
         android:background="@color/colorPrimary">
 
         <Button
+            android:id="@+id/favorite_to_popular"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:text="@string/popular_movies"
-            android:textColor="@color/textWhite"
+            android:textColor="@color/textLightGray"
             android:background="@color/colorPrimary"
 
             />
         <Button
-            android:id="@+id/popular_to_favorite"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
             android:text="@string/favorite_movies"
-            android:textColor="@color/textLightGray"
+            android:textColor="@color/textWhite"
             android:layout_weight="1"
             />
     </LinearLayout>
-
 </RelativeLayout>

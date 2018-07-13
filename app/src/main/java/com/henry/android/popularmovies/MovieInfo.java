@@ -1,5 +1,7 @@
 package com.henry.android.popularmovies;
 
+import java.util.ArrayList;
+
 /**
  * Created by Henry on 2017/11/21.
  */
@@ -12,6 +14,9 @@ class MovieInfo {
     private int MovieId;
     private double MovieVote;
     private int MovieRunTime;
+    private String[] MovieReview;
+    private ArrayList<String> MovieTrailer;
+
 
     MovieInfo(String movieTitle, String moviePosterPath,
               String movieOverview, String movieReleaseDate,
@@ -24,6 +29,9 @@ class MovieInfo {
         this.MovieVote = movieVote;
     }
 
+    MovieInfo(ArrayList<String> Trailer) {
+        this.MovieTrailer = Trailer;
+    }
     String getMovieTitle() { return MovieTitle; }
 
     String getMoviePosterPath() {
@@ -51,4 +59,20 @@ class MovieInfo {
     }
 
     int getMovieRunTime() { return MovieRunTime; }
+
+    public String[] getMovieReview() {
+        return MovieReview;
+    }
+
+    public ArrayList<String> getMovieTrailer() {
+        return MovieTrailer;
+    }
+
+    public void setMovieReview(String[] movieReview) {
+        MovieReview = movieReview;
+    }
+
+    public void setMovieTrailer(ArrayList<String> movieTrailer) {
+        MovieTrailer = movieTrailer;
+    }
 }

@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Popular Movies</string>
+    <string name="favorite_activity">My Favorites</string>
+
     <string name="eror_message">Failed to get movie data, please check internet connection</string>
+    <string name="fav_empty_message">There is no favorite movie</string>
+
     <string name="content_des_movieposter">MoviePoster</string>
     <string name="detail_favorite_button">Mark as \n favorite</string>
+    <string name="detail_Marked">Marked</string>
 
     <string name="movie_overview_test">Thor is imprisoned on the other side of the universe
         and finds himself in a race against time to get back to Asgard to stop Ragnarok,
@@ -15,4 +20,14 @@
 
     <string name="action_popular">Sort by Popularity</string>
     <string name="action_vote">Sort by Rating</string>
+    <string name="action_delete_all">Delete All</string>
+
+    <string name="deleteAll_dialog_msg">Delete All movies?</string>
+    <string name="delete_dialog_msg">Delete this movie?</string>
+
+    <string name="delete">Delete</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="popular_movies">Populars</string>
+    <string name="favorite_movies">Favorites</string>
 </resources>

@@ -4,6 +4,7 @@ import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -25,12 +27,18 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements MovieAdapter.MovieAdapterOnClickListener,
         LoaderManager.LoaderCallbacks<ArrayList<MovieInfo>> {
 
-    private static final int MOVIES_LOADER_ID = 1;
+    private SharedPreferences previous_loader;
+    private static final int MOVIES_LOADER_POPULAR = 1;
+    private static final int MOVIES_LOADER_RATE = 2;
+
     private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String LOADER = "Loader";
+
     private RecyclerView mRecyclerView;
     private MovieAdapter mMovieAdapter;
 
     private TextView mErrorMessageDisplay;
+    private Button mToFavoriteButton;
 
     private ProgressBar mLoadingIndicator;
 
@@ -43,6 +51,15 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         mRecyclerView = findViewById(R.id.recyclerview_movie);
         mErrorMessageDisplay = findViewById(R.id.tv_error_message_display);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
+        mToFavoriteButton = findViewById(R.id.popular_to_favorite);
+
+        mToFavoriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent it = new Intent(view.getContext(), FavoriteActivity.class);
+                startActivity(it);
+            }
+        });
 
         GridLayoutManager layoutManager = new GridLayoutManager(this,2,
                 GridLayoutManager.VERTICAL,false);
@@ -54,11 +71,18 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
         mRecyclerView.setAdapter(mMovieAdapter);
 
-        startLoader(Constant.QUERY_BY_POPULAR);
+        switch (readLoaderCache()) {
+            case MOVIES_LOADER_RATE:
+                startLoader(Constant.QUERY_BY_TOP_RATE, MOVIES_LOADER_RATE);
+                break;
+            default:
+                startLoader(Constant.QUERY_BY_POPULAR, MOVIES_LOADER_POPULAR);
+                break;
+        }
     }
 
 
-    private void startLoader(int queryType) {
+    private void startLoader(int queryType, int loaderType) {
         // Get a reference to the ConnectivityManager to check state of network connectivity
         ConnectivityManager connMgr = (ConnectivityManager)
                 getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -71,17 +95,25 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
             // Get a reference to the LoaderManager, in order to interact with loaders.
             LoaderManager loaderManager = getLoaderManager();
 
-            // Initialize the loader. Pass in the int ID constant defined above and pass in null for
+            // Initialize the loader. Pass in the int ID constant defined above and pass in query type for
             // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
             // because this activity implements the LoaderCallbacks interface).
             Bundle bundle = new Bundle();
             bundle.putInt(Constant.ExtraKeys.QueryType,queryType);
-            Log.e("Main", "" + queryType);
-            if (loaderManager.getLoader(MOVIES_LOADER_ID) == null) {
-                loaderManager.initLoader(MOVIES_LOADER_ID, bundle, this);
-            } else {
-                loaderManager.restartLoader(MOVIES_LOADER_ID, bundle, this);
+
+            switch (loaderType) {
+                case MOVIES_LOADER_POPULAR:
+                    writeLoaderCache(MOVIES_LOADER_POPULAR);
+                    loaderManager.initLoader(MOVIES_LOADER_POPULAR, bundle, this);
+                    break;
+                case MOVIES_LOADER_RATE:
+                    writeLoaderCache(MOVIES_LOADER_RATE);
+                    loaderManager.initLoader(MOVIES_LOADER_RATE, bundle, this);
+                    break;
             }
+
+            //loaderManager.restartLoader(MOVIES_LOADER_RATE, bundle, this);
+
         } else {
             // Otherwise, display error
             // First, hide loading indicator so error message will be visible
@@ -89,6 +121,19 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
 
             mErrorMessageDisplay.setVisibility(View.VISIBLE);
         }
+    }
+
+    private int readLoaderCache() {
+        previous_loader = getSharedPreferences(LOADER,MODE_PRIVATE);
+        int loaderType = previous_loader.getInt(LOADER, 0);
+        return loaderType;
+    }
+
+    private void writeLoaderCache(int loaderType) {
+        previous_loader = getSharedPreferences(LOADER,MODE_PRIVATE);
+        previous_loader.edit()
+                .putInt(LOADER, loaderType)
+                .commit();
     }
 
     @Override
@@ -145,12 +190,12 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Movi
         int id = item.getItemId();
 
         if (id == R.id.action_sort_by_popular) {
-            startLoader(Constant.QUERY_BY_POPULAR);
+            startLoader(Constant.QUERY_BY_POPULAR, MOVIES_LOADER_POPULAR);
             return true;
         }
 
         if (id == R.id.action_sort_by_rate) {
-            startLoader(Constant.QUERY_BY_TOP_RATE);
+            startLoader(Constant.QUERY_BY_TOP_RATE, MOVIES_LOADER_RATE);
             return true;
         }
 
