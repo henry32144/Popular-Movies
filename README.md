@@ -1,7 +1,7 @@
 Popular Movies
 ============================
 
-[English Version](https://github.com/henry32144/Popular-Movies/blob/master/README(en).md)
+[English Version](https://github.com/henry32144/popular-movies/blob/master/README(en).md)
 
 這是一個可以取得電影資訊的app，使用者可以根據熱門度或是評分排序電影。
 
